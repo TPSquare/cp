@@ -7,23 +7,31 @@ using namespace std;
 #define FORs(i, a, b) for (i = a; i <= b; i++)
 #define ROF(i, a, b) for (i = a; i > b; i--)
 #define ROFs(i, a, b) for (i = a; i >= b; i--)
+#define B begin()
+#define E end()
+#define F first
+#define S second
+#define SZ size()
+#define A(x) x.begin(), x.end()
 
-ll n, k, sl, i, c, m, m2, a[50006];
+ll n, k, i, j, kt, tt, c, a[100006], t;
 int main() {
-    $("angry");
+    $("count");
     cin >> n >> k;
     FOR(i, 0, n) cin >> a[i];
     sort(a, a + n);
-    m = (a[n - 1] + a[0]) / k / 2 + 2;
-    while (!sl || sl <= k) {
-        --m;
-        m2 = 2 * m;
-        i = sl = 0;
-        while (i < n && sl <= k) {
-            c = a[i++] + m2;
-            ++sl;
-            while (a[i] <= c && i < n) ++i;
+    FOR(i, 1, n) {
+        tt = 1;
+        kt = k;
+        j = i - 1;
+        while (j >= 0 && kt > 0 && a[i] - a[j] <= kt) {
+            kt -= a[i] - a[j--];
+            ++tt;
+        }
+        if (tt > t) {
+            t = tt;
+            c = a[i];
         }
     }
-    cout << (m + 1);
+    cout << t << " " << c;
 }

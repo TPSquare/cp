@@ -8,22 +8,21 @@ using namespace std;
 #define ROF(i, a, b) for (i = a; i > b; i--)
 #define ROFs(i, a, b) for (i = a; i >= b; i--)
 
-ll n, k, sl, i, c, m, m2, a[50006];
+set<ll> a;
+ll n, x;
 int main() {
-    $("angry");
-    cin >> n >> k;
-    FOR(i, 0, n) cin >> a[i];
-    sort(a, a + n);
-    m = (a[n - 1] + a[0]) / k / 2 + 2;
-    while (!sl || sl <= k) {
-        --m;
-        m2 = 2 * m;
-        i = sl = 0;
-        while (i < n && sl <= k) {
-            c = a[i++] + m2;
-            ++sl;
-            while (a[i] <= c && i < n) ++i;
+    $("tower");
+    cin >> n >> x;
+    a.insert(x);
+    --n;
+    while (n--) {
+        cin >> x;
+        auto it = lower_bound(a.begin(), a.end(), x);
+        if (it == a.end()) a.insert(x);
+        else {
+            a.erase(it);
+            a.insert(x);
         }
     }
-    cout << (m + 1);
+    cout << a.size();
 }
